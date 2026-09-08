@@ -33,6 +33,15 @@ app.use('/api', apiLimiter);
 
 app.use('/uploads', express.static(path.join(process.cwd(), env.uploadDir)));
 
+app.get('/', (req, res) =>
+  res.json({
+    success: true,
+    message: 'ResumeForge AI API',
+    hint: 'This is the backend API. The app runs at the client dev server (default http://localhost:5173).',
+    health: '/api/health',
+  })
+);
+
 app.get('/api/health', (req, res) => res.json({ success: true, message: 'ResumeForge AI API is running' }));
 
 app.use('/api/auth', authRoutes);
